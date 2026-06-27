@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عيد ميلاد نور ♥</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --rose:    #b5295a;
+  --rose-lt: #e8607a;
+  --blush:   #fce8ef;
+  --petal:   #f9d0dc;
+  --deep:    #6b0f2e;
+  --ink:     #3a1525;
+  --muted:   #8a4560;
+  --card-bg: #fffafc;
+  --page-bg: #fff5f8;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--page-bg);
+  font-family: 'Tajawal', sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ════════════════════════════════
+   LOADER
+════════════════════════════════ */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(160deg, #3a0a1e 0%, #6b0f2e 50%, #3a0a1e 100%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#loader.hidden { opacity: 0; visibility: hidden; }
+
+.loader-petals {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.petal {
+  position: absolute;
+  bottom: -30px;
+  font-size: 1.2rem;
+  opacity: 0;
+  animation: floatPetal linear infinite;
+}
+
+@keyframes floatPetal {
+  0%   { transform: translateY(0) rotate(0deg);   opacity: 0; }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+}
+
+.loader-icon {
+  font-size: 3rem;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.25); }
+}
+
+.loader-name {
+  font-family: 'Amiri', serif;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  color: #ffd4e4;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.loader-name span {
+  color: #ffb3cc;
+  font-style: italic;
+}
+
+.loader-sentence {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: #f0b8cc;
+  text-align: center;
+  max-width: 460px;
+  padding: 0 1.5rem;
+  line-height: 1.9;
+  min-height: 3.5rem;
+  font-weight: 300;
+  transition: opacity 0.5s ease;
+}
+
+.loader-bar-wrap {
+  width: min(320px, 80vw);
+  height: 3px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.loader-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ff7aaa, #ffb3cc);
+  border-radius: 10px;
+  transition: width 0.25s ease;
+}
+
+.loader-skip {
+  font-size: 0.8rem;
+  color: rgba(255,180,200,0.5);
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: 'Tajawal', sans-serif;
+  transition: color 0.2s;
+}
+.loader-skip:hover { color: rgba(255,180,200,0.9); }
+
+/* ════════════════════════════════
+   FLOATING HEARTS (page bg)
+════════════════════════════════ */
+#hearts-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ════════════════════════════════
+   PAGE LAYOUT
+════════════════════════════════ */
+.page-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 1.25rem 5rem;
+}
+
+/* ════════════════════════════════
+   HERO
+════════════════════════════════ */
+.hero {
+  text-align: center;
+  padding: 5rem 1rem 2.5rem;
+}
+.hero-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--rose-lt);
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.hero-title {
+  font-family: 'Amiri', serif;
+  font-size: clamp(2.6rem, 7vw, 4.2rem);
+  color: var(--deep);
+  line-height: 1.3;
+  margin-bottom: 0.7rem;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--rose);
+}
+.hero-sub {
+  font-family: 'Amiri', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--rose);
+  color: #fff;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  padding: 0.5rem 1.6rem;
+  border-radius: 100px;
+}
+
+/* ════════════════════════════════
+   DIVIDER
+════════════════════════════════ */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.5rem 0;
+  color: var(--petal);
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--petal), transparent);
+}
+
+/* ════════════════════════════════
+   LETTER
+════════════════════════════════ */
+.letter {
+  background: var(--card-bg);
+  border: 1px solid var(--petal);
+  border-radius: 18px;
+  padding: 2.2rem 2.5rem 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+.letter::before {
+  content: '❝';
+  font-family: 'Amiri', serif;
+  font-size: 5rem;
+  color: var(--petal);
+  position: absolute;
+  top: -0.6rem;
+  right: 1.2rem;
+  line-height: 1;
+}
+.letter p {
+  font-family: 'Amiri', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 2;
+  color: var(--deep);
+  padding-right: 1.5rem;
+}
+.letter-sign {
+  text-align: left;
+  margin-top: 1.2rem;
+  font-family: 'Amiri', serif;
+  font-size: 1rem;
+  color: var(--rose);
+}
+
+/* ════════════════════════════════
+   TIMELINE
+════════════════════════════════ */
+.section-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.7rem;
+  color: var(--deep);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.timeline {
+  position: relative;
+  padding-right: 2.8rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  right: 0.75rem;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--petal), var(--rose), var(--deep), var(--rose), var(--petal));
+  border-radius: 2px;
+}
+
+.memory {
+  position: relative;
+  margin-bottom: 2.8rem;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.memory.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.memory-dot {
+  position: absolute;
+  right: -2.8rem;
+  top: 0.9rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 2.5px solid var(--rose-lt);
+  z-index: 2;
+}
+.memory-dot.active {
+  background: var(--rose);
+  border-color: var(--deep);
+  box-shadow: 0 0 0 4px var(--petal);
+}
+
+.memory-card {
+  background: var(--card-bg);
+  border: 1px solid var(--petal);
+  border-radius: 16px;
+  padding: 1.4rem 1.6rem;
+  transition: box-shadow 0.25s;
+}
+.memory-card:hover {
+  box-shadow: 0 8px 28px rgba(181,41,90,0.1);
+}
+
+.memory-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.memory-emoji { font-size: 1.4rem; }
+.memory-date-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--rose-lt);
+  font-weight: 500;
+}
+.memory-date-value {
+  font-size: 0.72rem;
+  color: var(--muted);
+  background: var(--blush);
+  padding: 0.18rem 0.65rem;
+  border-radius: 100px;
+}
+
+.memory-headline {
+  font-family: 'Amiri', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--deep);
+  margin-bottom: 0.45rem;
+  line-height: 1.5;
+}
+.memory-body {
+  font-size: 0.97rem;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.memory-tag {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  background: var(--petal);
+  color: var(--deep);
+  padding: 0.22rem 0.8rem;
+  border-radius: 100px;
+}
+
+/* ── photo upload ── */
+.photo-zone {
+  margin-top: 1rem;
+  border-radius: 12px;
+  border: 1.5px dashed var(--petal);
+  background: var(--blush);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s;
+}
+.photo-zone:hover { border-color: var(--rose-lt); }
+
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 1.6rem 1rem;
+}
+.photo-placeholder-icon { font-size: 1.8rem; }
+.photo-placeholder-text {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.photo-zone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.photo-preview {
+  display: none;
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.photo-preview.shown { display: block; }
+
+.photo-remove {
+  display: none;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(107,15,46,0.75);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.65rem;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+}
+.photo-remove.shown { display: block; }
+
+/* ════════════════════════════════
+   BIRTHDAY STATEMENTS
+════════════════════════════════ */
+.bday-section {
+  margin-top: 4rem;
+  text-align: center;
+}
+.bday-section .section-title { margin-bottom: 0.5rem; }
+.bday-section-sub {
+  font-family: 'Amiri', serif;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
+}
+
+.bday-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.bday-card {
+  background: var(--card-bg);
+  border: 1px solid var(--petal);
+  border-radius: 16px;
+  padding: 1.5rem 1.3rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s;
+}
+.bday-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.bday-card:hover { box-shadow: 0 8px 24px rgba(181,41,90,0.1); }
+.bday-card-num {
+  font-family: 'Amiri', serif;
+  font-size: 2.2rem;
+  color: var(--petal);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+.bday-card-text {
+  font-family: 'Amiri', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--deep);
+  line-height: 1.8;
+}
+
+/* ════════════════════════════════
+   CLOSING
+════════════════════════════════ */
+.closing {
+  text-align: center;
+  padding: 3.5rem 1rem 2rem;
+}
+.closing-heart {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  14%      { transform: scale(1.2); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.1); }
+  70%      { transform: scale(1); }
+}
+.closing-text {
+  font-family: 'Amiri', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--deep);
+  line-height: 2;
+}
+.closing-sig {
+  font-family: 'Amiri', serif;
+  font-size: 1.6rem;
+  color: var(--rose);
+  margin-top: 1rem;
+}
+
+/* ════════════════════════════════
+   FOOTER
+════════════════════════════════ */
+footer {
+  text-align: center;
+  padding: 1.5rem 0 0;
+  font-size: 0.78rem;
+  color: var(--petal);
+  letter-spacing: 0.1em;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ LOADER ══════════ -->
+<div id="loader" role="status" aria-live="polite">
+  <div class="loader-petals" id="loader-petals"></div>
+
+  <div class="loader-icon">🌸</div>
+
+  <div class="loader-name">
+    كل عام وأنتِ بخير<br>
+    <span>نور</span>
+  </div>
+
+  <div class="loader-sentence" id="loader-sentence">
+    يوم ميلادك ليس مجرد يوم…
+  </div>
+
+  <div class="loader-bar-wrap">
+    <div class="loader-bar" id="loader-bar"></div>
+  </div>
+
+  <button class="loader-skip" onclick="skipLoader()">اضغط للتخطي</button>
+</div>
+
+<!-- ══════════ FLOATING HEARTS ══════════ -->
+<canvas id="hearts-canvas"></canvas>
+
+<!-- ══════════ MAIN PAGE ══════════ -->
+<main class="page-wrap" id="main-page" aria-label="صفحة ذكريات نور">
+
+  <!-- HERO -->
+  <header class="hero">
+    <p class="hero-eyebrow">رسالة حب من القلب إلى القلب</p>
+    <h1 class="hero-title">
+      عيد ميلادك يا <em>نور</em>
+    </h1>
+    <p class="hero-sub">
+      كل لحظة عشناها معاً كانت أجمل من قصيدة،<br>
+      وكل يوم بجانبك كان هديّة ما استحقّيتها.
+    </p>
+    <span class="hero-badge">١٢ يوليو ٢٠٢٦</span>
+  </header>
+
+  <div class="divider">🌸</div>
+
+  <!-- LETTER -->
+  <div class="letter">
+    <p>
+      نور،<br><br>
+      أنا مبرمج… أتعامل مع الأكواد والأرقام كل يوم.
+      لكن معكِ تعلّمت أن أجمل ما يمكن برمجته في الحياة
+      هو لحظة واحدة تُشعركِ بأنّكِ في المكان الصحيح
+      بجانب الشخص الصحيح.
+      هذه الصفحة هي هديّتي لكِ — ذكرياتنا معاً، مُرتّبةً بعناية،
+      لأنّكِ تستحقين ما هو أكثر من مجرد كلمات.
+    </p>
+    <div class="letter-sign">— يحبّكِ دائماً ♥</div>
+  </div>
+
+  <!-- TIMELINE -->
+  <h2 class="section-title">📖 حكايتنا معاً</h2>
+
+  <div class="timeline" id="timeline">
+
+    <!-- 1: First time I saw her -->
+    <div class="memory" data-index="0">
+      <div class="memory-dot active"></div>
+      <div class="memory-card">
+        <div class="memory-meta">
+          <span class="memory-emoji">👀</span>
+          <span class="memory-date-label">أوّل مرّة شفتكِ</span>
+          <span class="memory-date-value">— ضع التاريخ هنا —</span>
+        </div>
+        <div class="memory-headline">لحظة ما نسيتها حتى اليوم</div>
+        <div class="memory-body">
+          كنتُ في [اكتب المكان]، والوقت كان [اكتب الوقت].
+          رأيتكِ لأوّل مرّة وما عرفت يومها إنّ هذه اللحظة ستغيّر كل شيء.
+          [اكتب ما شعرت به بالتفصيل — هذا المكان كلّه لك]
+        </div>
+        <span class="memory-tag">✨ البداية</span>
+        <div class="photo-zone" onclick="triggerUpload(this)">
+          <input type="file" accept="image/*" onchange="handlePhoto(this)" />
+          <div class="photo-placeholder">
+            <span class="photo-placeholder-icon">📷</span>
+            <span class="photo-placeholder-text">أضف صورة من هذه اللحظة (اختياري)</span>
+          </div>
+          <img class="photo-preview" alt="ذكرى" />
+          <button class="photo-remove" onclick="removePhoto(event, this)">✕ إزالة</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2: The day we met -->
+    <div class="memory" data-index="1">
+      <div class="memory-dot"></div>
+      <div class="memory-card">
+        <div class="memory-meta">
+          <span class="memory-emoji">💬</span>
+          <span class="memory-date-label">يوم تعرّفنا على بعض</span>
+          <span class="memory-date-value">— ضع التاريخ هنا —</span>
+        </div>
+        <div class="memory-headline">أوّل كلمة قلتِها لي</div>
+        <div class="memory-body">
+          [اكتب كيف بدأت القصة — هل كان لقاء مصادفة؟ هل كان أحد يعرّفنا؟
+          ماذا قالت؟ ماذا قلتُ؟ ما أوّل شيء أضحككِ؟]
+          كان يومًا عاديًا تحوّل إلى ذكرى ما تمحى.
+        </div>
+        <span class="memory-tag">💬 اللقاء الأوّل</span>
+        <div class="photo-zone" onclick="triggerUpload(this)">
+          <input type="file" accept="image/*" onchange="handlePhoto(this)" />
+          <div class="photo-placeholder">
+            <span class="photo-placeholder-icon">📷</span>
+            <span class="photo-placeholder-text">أضف صورة من هذه اللحظة (اختياري)</span>
+          </div>
+          <img class="photo-preview" alt="ذكرى" />
+          <button class="photo-remove" onclick="removePhoto(event, this)">✕ إزالة</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3: Engagement preparation -->
+    <div class="memory" data-index="2">
+      <div class="memory-dot"></div>
+      <div class="memory-card">
+        <div class="memory-meta">
+          <span class="memory-emoji">💍</span>
+          <span class="memory-date-label">يوم التحضير للخطوبة</span>
+          <span class="memory-date-value">— ضع التاريخ هنا —</span>
+        </div>
+        <div class="memory-headline">قرّرتُ أنّكِ ستكونين نوري للأبد</div>
+        <div class="memory-body">
+          [اكتب عن هذا اليوم — كيف كنتَ تشعر؟ كيف حضّرتَ للأمر؟
+          ما الذي كان يدور في بالك وأنت تعرف أنّكَ ستطلب يدها؟
+          هذه اللحظة تستحق كل التفاصيل.]
+        </div>
+        <span class="memory-tag">💍 خطوة الأبد</span>
+        <div class="photo-zone" onclick="triggerUpload(this)">
+          <input type="file" accept="image/*" onchange="handlePhoto(this)" />
+          <div class="photo-placeholder">
+            <span class="photo-placeholder-icon">📷</span>
+            <span class="photo-placeholder-text">أضف صورة من هذه اللحظة (اختياري)</span>
+          </div>
+          <img class="photo-preview" alt="ذكرى" />
+          <button class="photo-remove" onclick="removePhoto(event, this)">✕ إزالة</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4: Return from abroad -->
+    <div class="memory" data-index="3">
+      <div class="memory-dot"></div>
+      <div class="memory-card">
+        <div class="memory-meta">
+          <span class="memory-emoji">✈️</span>
+          <span class="memory-date-label">يوم عودتي من الغربة</span>
+          <span class="memory-date-value">— ضع التاريخ هنا —</span>
+        </div>
+        <div class="memory-headline">أوّل نظرة بعد الغياب</div>
+        <div class="memory-body">
+          الغربة علّمتني كيف يشعر الإنسان حين يكون بعيدًا عمّن يحب.
+          [اكتب عن لحظة العودة — ماذا كان في قلبك؟ ما أوّل شيء قلتيه؟
+          كيف كان ذلك اللقاء بعد الانتظار؟]
+          بعض اللحظات لا تعوّضها المسافة.
+        </div>
+        <span class="memory-tag">✈️ العودة إليكِ</span>
+        <div class="photo-zone" onclick="triggerUpload(this)">
+          <input type="file" accept="image/*" onchange="handlePhoto(this)" />
+          <div class="photo-placeholder">
+            <span class="photo-placeholder-icon">📷</span>
+            <span class="photo-placeholder-text">أضف صورة من هذه اللحظة (اختياري)</span>
+          </div>
+          <img class="photo-preview" alt="ذكرى" />
+          <button class="photo-remove" onclick="removePhoto(event, this)">✕ إزالة</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5: A beautiful outing together -->
+    <div class="memory" data-index="4">
+      <div class="memory-dot"></div>
+      <div class="memory-card">
+        <div class="memory-meta">
+          <span class="memory-emoji">🌅</span>
+          <span class="memory-date-label">يوم خرجنا سوا</span>
+          <span class="memory-date-value">— ضع التاريخ هنا —</span>
+        </div>
+        <div class="memory-headline">يوم ما أريد أن أنساه</div>
+        <div class="memory-body">
+          [اكتب عن خروجتكم — المكان، ما فعلتموه، ما ضحكتم عليه،
+          ما الذي جعل ذلك اليوم مختلفًا عن أي يوم آخر.
+          هذا هو المكان الذي تجعله نور لحظة خاصة.]
+        </div>
+        <span class="memory-tag">🌅 لحظتنا المفضّلة</span>
+        <div class="photo-zone" onclick="triggerUpload(this)">
+          <input type="file" accept="image/*" onchange="handlePhoto(this)" />
+          <div class="photo-placeholder">
+            <span class="photo-placeholder-icon">📷</span>
+            <span class="photo-placeholder-text">أضف صورة من هذه اللحظة (اختياري)</span>
+          </div>
+          <img class="photo-preview" alt="ذكرى" />
+          <button class="photo-remove" onclick="removePhoto(event, this)">✕ إزالة</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6: Today -->
+    <div class="memory" data-index="5">
+      <div class="memory-dot active"></div>
+      <div class="memory-card">
+        <div class="memory-meta">
+          <span class="memory-emoji">🎂</span>
+          <span class="memory-date-label">اليوم — ١٢ يوليو ٢٠٢٦</span>
+          <span class="memory-date-value">يوم ميلادها</span>
+        </div>
+        <div class="memory-headline">عيد ميلاد يا نور 🎉</div>
+        <div class="memory-body">
+          اليوم أحتفل بكِ — ليس فقط بعمركِ، بل بكل ضحكة منحتِيني إيّاها،
+          وكل لحظة هدوء جلسنا فيها، وكل يوم أثبتتِ لي فيه أنّ الحياة
+          تستحق عيشها حين تكونين بجانبي.
+          أنتِ يا نور لستِ مجرّد اسم — أنتِ الضوء الذي يجعل كل شيء أجمل.
+        </div>
+        <span class="memory-tag">🎂 حاضرنا ♥</span>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <!-- ══ BIRTHDAY STATEMENTS ══ -->
+  <div class="bday-section">
+    <div class="divider">🌸</div>
+    <h2 class="section-title">🎀 كلمات من القلب</h2>
+    <p class="bday-section-sub">ستة أشياء أريدكِ أن تعرفيها في يوم ميلادكِ</p>
+
+    <div class="bday-cards">
+
+      <div class="bday-card">
+        <div class="bday-card-num">١</div>
+        <p class="bday-card-text">
+          أنتِ لستِ فقط جزءًا من حياتي —<br>
+          أنتِ السبب الذي يجعلني أستيقظ كل يوم وأشعر بالامتنان.
+        </p>
+      </div>
+
+      <div class="bday-card">
+        <div class="bday-card-num">٢</div>
+        <p class="bday-card-text">
+          كل عيد ميلاد مررتِ به قبل أن أعرفكِ<br>
+          كان ينتظر اللحظة التي أكون فيها موجودًا أحتفل معكِ.
+        </p>
+      </div>
+
+      <div class="bday-card">
+        <div class="bday-card-num">٣</div>
+        <p class="bday-card-text">
+          لو طلبت مني أختار من بين كل الناس —<br>
+          كنت سأختارك في كل مرّة، في كل حياة.
+        </p>
+      </div>
+
+      <div class="bday-card">
+        <div class="bday-card-num">٤</div>
+        <p class="bday-card-text">
+          اسمكِ «نور» ما اخترتِيه —<br>
+          لكنّكِ بالفعل نوّرتِ كل شيء من حولكِ،
+          وأنا أعلى دليل على ذلك.
+        </p>
+      </div>
+
+      <div class="bday-card">
+        <div class="bday-card-num">٥</div>
+        <p class="bday-card-text">
+          أتمنى لكِ في عيد ميلادكِ<br>
+          ما تتمنّاه لنفسكِ — وأكثر.
+          لأنّكِ تستحقين كل شيء جميل.
+        </p>
+      </div>
+
+      <div class="bday-card">
+        <div class="bday-card-num">٦</div>
+        <p class="bday-card-text">
+          ما في كود كتبته يوم في حياتي<br>
+          أجمل من قصّتنا.
+          وهذه الصفحة هي إثبات.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <span class="closing-heart">♥</span>
+    <p class="closing-text">
+      "في عالم مليء بالأكواد والتعقيدات،<br>
+      أنتِ أبسط شيء وأجمل شيء في حياتي.<br>
+      كل عام وأنتِ نوري."
+    </p>
+    <div class="closing-sig">يحبّكِ — دائماً ♥</div>
+  </div>
+
+  <div class="divider">🌸</div>
+
+</main>
+
+<footer>
+  صُنع بالحبّ وبالكود ♥ — عيد ميلاد سعيد يا نور
+</footer>
+
+<script>
+/* ═══════════════════════════════
+   LOADER LOGIC
+═══════════════════════════════ */
+const sentences = [
+  "يوم ميلادكِ ليس مجرد يوم… إنّه احتفال بوجودكِ في هذا العالم 🌸",
+  "نور — اسم اخترته الحياة لكِ لأنّكِ تضيئين كل شيء من حولكِ ✨",
+  "كل عام يمر يزيدكِ جمالاً وحكمةً ودفئًا… وأنا شاهد على ذلك ♥",
+  "في يوم ميلادكِ، أتوقف لأشكر الحياة على أنّها أوجدتكِ في دربي 🌹",
+  "لو كانت الذكريات تُكتب… كانت ذكرياتنا رواية لا تنتهي 📖",
+  "استعدّي… ذكرياتنا تنتظركِ 💫"
+];
+
+let si = 0, progress = 0;
+const sentEl = document.getElementById('loader-sentence');
+const barEl  = document.getElementById('loader-bar');
+const step   = 100 / sentences.length;
+
+function nextSentence() {
+  if (si >= sentences.length) { finishLoader(); return; }
+  sentEl.style.opacity = '0';
+  setTimeout(() => {
+    sentEl.textContent = sentences[si++];
+    sentEl.style.opacity = '1';
+    progress = si * step;
+    barEl.style.width = Math.min(progress, 100) + '%';
+  }, 400);
+  if (si < sentences.length) setTimeout(nextSentence, 2200);
+  else setTimeout(finishLoader, 2200);
+}
+
+function finishLoader() {
+  barEl.style.width = '100%';
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+    startPage();
+  }, 600);
+}
+
+function skipLoader() { finishLoader(); }
+
+// Floating petals in loader
+(function spawnPetals() {
+  const container = document.getElementById('loader-petals');
+  const emojis = ['🌸','🌺','🌹','💗','💖','✨','🌷'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('span');
+    p.className = 'petal';
+    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    p.style.left = Math.random() * 100 + '%';
+    p.style.fontSize = (0.9 + Math.random() * 0.8) + 'rem';
+    const dur = 7 + Math.random() * 8;
+    p.style.animationDuration = dur + 's';
+    p.style.animationDelay = (Math.random() * dur) + 's';
+    container.appendChild(p);
+  }
+})();
+
+setTimeout(nextSentence, 600);
+
+/* ═══════════════════════════════
+   PAGE START — scroll reveal
+═══════════════════════════════ */
+function startPage() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.memory, .bday-card').forEach(el => obs.observe(el));
+}
+
+/* ═══════════════════════════════
+   FLOATING HEARTS
+═══════════════════════════════ */
+(function() {
+  const canvas = document.getElementById('hearts-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, hearts = [];
+
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function Heart() { this.reset(true); }
+  Heart.prototype.reset = function(init) {
+    this.x     = Math.random() * W;
+    this.y     = init ? Math.random() * H : H + 30;
+    this.size  = 7 + Math.random() * 12;
+    this.speed = 0.35 + Math.random() * 0.6;
+    this.alpha = 0.08 + Math.random() * 0.14;
+    this.drift = (Math.random() - 0.5) * 0.35;
+  };
+
+  for (let i = 0; i < 24; i++) hearts.push(new Heart());
+
+  function drawHeart(x, y, s) {
+    ctx.save(); ctx.translate(x, y); ctx.scale(s/20, s/20);
+    ctx.beginPath();
+    ctx.moveTo(0, -5);
+    ctx.bezierCurveTo(-10, -15, -20, 0, 0, 12);
+    ctx.bezierCurveTo(20, 0, 10, -15, 0, -5);
+    ctx.closePath(); ctx.fill(); ctx.restore();
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    hearts.forEach(h => {
+      ctx.fillStyle = `rgba(181,41,90,${h.alpha})`;
+      drawHeart(h.x, h.y, h.size);
+      h.y -= h.speed; h.x += h.drift;
+      if (h.y < -30) h.reset(false);
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ═══════════════════════════════
+   PHOTO UPLOAD
+═══════════════════════════════ */
+function triggerUpload(zone) {
+  zone.querySelector('input[type="file"]').click();
+}
+
+function handlePhoto(input) {
+  const zone    = input.closest('.photo-zone');
+  const preview = zone.querySelector('.photo-preview');
+  const remove  = zone.querySelector('.photo-remove');
+  const holder  = zone.querySelector('.photo-placeholder');
+  const file    = input.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    preview.src = e.target.result;
+    preview.classList.add('shown');
+    remove.classList.add('shown');
+    holder.style.display = 'none';
+    input.style.display  = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+function removePhoto(e, btn) {
+  e.stopPropagation();
+  const zone    = btn.closest('.photo-zone');
+  const preview = zone.querySelector('.photo-preview');
+  const input   = zone.querySelector('input[type="file"]');
+  const holder  = zone.querySelector('.photo-placeholder');
+
+  preview.src = '';
+  preview.classList.remove('shown');
+  btn.classList.remove('shown');
+  holder.style.display = '';
+  input.style.display  = '';
+  input.value = '';
+}
+</script>
+</body>
+</html>
